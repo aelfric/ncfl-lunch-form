@@ -293,22 +293,6 @@ function App() {
               </>
             ))}
           </tbody>
-          <tfoot>
-            <tr>
-              <th colSpan={5} style={{ textAlign: "right" }}>
-                Student Total:
-              </th>
-              <td style={{ textAlign: "right" }}>{0}</td>
-              <td style={{ textAlign: "right" }}>$0.00</td>
-            </tr>
-            <tr>
-              <th colSpan={5} style={{ textAlign: "right" }}>
-                Judge Total:
-              </th>
-              <td style={{ textAlign: "right" }}>{0}</td>
-              <td style={{ textAlign: "right" }}>$0.00</td>
-            </tr>
-          </tfoot>
         </table>
         <button type="submit">Submit</button>
       </form>
