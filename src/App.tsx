@@ -280,6 +280,7 @@ function App() {
                         name={`entry.${f.widgets[0].id}`}
                         aria-label={f.label}
                         type="number"
+                        min={0}
                         step={1}
                       />
                     </td>
