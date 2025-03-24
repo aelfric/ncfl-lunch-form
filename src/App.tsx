@@ -92,7 +92,7 @@ function App() {
         <table>
           <tbody>
             <tr className="top">
-              <td colspan="2">
+              <td colSpan={2}>
                 <table>
                   <tbody>
                     <tr>
@@ -121,7 +121,7 @@ function App() {
             </tr>
 
             <tr className="information">
-              <td colspan="2">
+              <td colSpan={2}>
                 <table>
                   <tbody>
                     <tr>
