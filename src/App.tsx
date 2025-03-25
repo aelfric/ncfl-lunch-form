@@ -16,9 +16,20 @@ const formProps: Record<
 > = {
   "Contact Phone": {
     type: "tel",
+    required: true,
   },
   "Contact Email": {
     type: "email",
+    required: true,
+  },
+  School: {
+    required: true,
+  },
+  "Coach Name": {
+    required: true,
+  },
+  Diocese: {
+    required: true,
   },
 };
 
@@ -57,11 +68,11 @@ function App() {
           studentCount += Number(v);
         } else if (map[k].includes("Judge Lunch Option")) {
           judgeCount += Number(v);
-        } else if (map[k] === "School"){
+        } else if (map[k] === "School") {
           school = String(v);
-        } else if (map[k] === "Coach Name"){
+        } else if (map[k] === "Coach Name") {
           requester = String(v);
-        } else if (map[k] === "Contact Email"){
+        } else if (map[k] === "Contact Email") {
           email = String(v);
         }
       }
@@ -82,7 +93,7 @@ function App() {
       judgeCount,
       school,
       requester,
-      email
+      email,
     });
   }
 
@@ -201,6 +212,7 @@ function App() {
             <select
               name={`entry.${topForms[0].widgets[0].id}`}
               id={`${topForms[0].id}`}
+              required={true}
             >
               <option>Please choose...</option>
               {dioceses.map((d) => (
