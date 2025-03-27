@@ -116,7 +116,7 @@ function App() {
                       </td>
 
                       <td>
-                        Invoice #: 123
+                        Invoice
                         <br />
                         Created:{" "}
                         {new Intl.DateTimeFormat("en-US", {
