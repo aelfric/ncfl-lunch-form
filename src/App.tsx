@@ -1,6 +1,7 @@
 import "./App.css";
 import "./invoice.css";
 import "./pico.min.css";
+import "./index.css"
 
 import formObj from "./form.json";
 import dioceses from "./dioceses.json";
@@ -38,7 +39,7 @@ const map: Record<string, string> = formObj.fields.reduce(
   {},
 );
 
-let currencyFormat = new Intl.NumberFormat("us-EN", {
+const currencyFormat = new Intl.NumberFormat("us-EN", {
   style: "currency",
   currency: "USD",
 });
@@ -100,101 +101,103 @@ function App() {
   if (invoice) {
     return (
       <div className="invoice-box">
-        <table>
-          <tbody>
-            <tr className="top">
-              <td colSpan={2}>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td className="title">
-                        <img
-                          src="https://www.ncflnationals.org/uploads/7/3/2/8/7328308/published/ncfl.png"
-                          alt="National Catholic Forensic League"
-                          style={{ width: "100%", maxWidth: "125px" }}
-                        />
-                      </td>
+        <div>
+          <table>
+            <tbody>
+              <tr className="top">
+                <td colSpan={2}>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td className="title">
+                          <img
+                            src="https://www.ncflnationals.org/uploads/7/3/2/8/7328308/published/ncfl.png"
+                            alt="National Catholic Forensic League"
+                            style={{ width: "100%", maxWidth: "125px" }}
+                          />
+                        </td>
 
-                      <td>
-                        Invoice
-                        <br />
-                        Created:{" "}
-                        {new Intl.DateTimeFormat("en-US", {
-                          dateStyle: "long",
-                        }).format(new Date())}
-                        <br />
-                        Due: May 17, 2025
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-
-            <tr className="information">
-              <td colSpan={2}>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <address>
-                          <b>National Catholic Forensic League</b>
+                        <td>
+                          Invoice
                           <br />
-                          c/o Mike Colletti
+                          Created:{" "}
+                          {new Intl.DateTimeFormat("en-US", {
+                            dateStyle: "long",
+                          }).format(new Date())}
                           <br />
-                          PO Box 31785
+                          Due: May 17, 2025
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+
+              <tr className="information">
+                <td colSpan={2}>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <address>
+                            <b>National Catholic Forensic League</b>
+                            <br />
+                            c/o Mike Colletti
+                            <br />
+                            PO Box 31785
+                            <br />
+                            Chicago, IL 60631
+                          </address>
+                        </td>
+
+                        <td>
+                          <strong>School Name:</strong> {invoice.school}
                           <br />
-                          Chicago, IL 60631
-                        </address>
-                      </td>
+                          <strong>Requester’s Name:</strong> {invoice.requester}
+                          <br />
+                          <strong>Email Address:</strong> {invoice.email}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
 
-                      <td>
-                        <strong>School Name:</strong> {invoice.school}
-                        <br />
-                        <strong>Requester’s Name:</strong> {invoice.requester}
-                        <br />
-                        <strong>Email Address:</strong> {invoice.email}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
+              <tr className="heading">
+                <td>Payment Method</td>
 
-            <tr className="heading">
-              <td>Payment Method</td>
+                <td>&nbsp;</td>
+              </tr>
 
-              <td>&nbsp;</td>
-            </tr>
+              <tr className="details">
+                <td colSpan={2}>
+                  Please make all checks payable to the National Catholic
+                  Forensic League. Payment must be mailed by May 17th or paid
+                  in-person in Chicago on May 24th at the Hilton Chicago
+                  Boulevard Foyer between 10 AM and 8 PM.
+                </td>
+              </tr>
 
-            <tr className="details">
-              <td colSpan={2}>
-                Please make all checks payable to the National Catholic Forensic
-                League. Payment must be mailed by May 17th or paid in-person in
-                Chicago on May 24th at the Hilton Chicago Boulevard Foyer
-                between 10 AM and 8 PM.
-              </td>
-            </tr>
+              <tr className="heading">
+                <td>Item</td>
 
-            <tr className="heading">
-              <td>Item</td>
+                <td>Price</td>
+              </tr>
 
-              <td>Price</td>
-            </tr>
+              <tr className="item">
+                <td>Student Lunches (x {invoice.studentCount})</td>
 
-            <tr className="item">
-              <td>Student Lunches (x {invoice.studentCount})</td>
+                <td>{currencyFormat.format(invoice.studentCount * 15)}</td>
+              </tr>
 
-              <td>{currencyFormat.format(invoice.studentCount * 15)}</td>
-            </tr>
+              <tr className="item">
+                <td>Judge Lunches (x {invoice.judgeCount})</td>
 
-            <tr className="item">
-              <td>Judge Lunches (x {invoice.judgeCount})</td>
-
-              <td>$0.00</td>
-            </tr>
-          </tbody>
-        </table>
+                <td>$0.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
@@ -224,7 +227,7 @@ function App() {
           </label>
         </p>
         {topForms.slice(1).map((f) => (
-          <p>
+          <p key={f.id}>
             <label>
               {f.label}{" "}
               <input
@@ -267,6 +270,7 @@ function App() {
           Chicago, IL 60631
         </address>
         <hr />
+        <div className={"lunch-table"}>
         <table>
           <thead>
             <tr>
@@ -285,9 +289,8 @@ function App() {
                 <tr key={i}>
                   <td>{c[0].label.replace(/Lunch Option \d /, "")}</td>
                   {c.map((f) => (
-                    <td>
+                    <td key={f.id}>
                       <input
-                        key={f.id}
                         id={`${f.id}`}
                         name={`entry.${f.widgets[0].id}`}
                         aria-label={f.label}
@@ -307,6 +310,7 @@ function App() {
             ))}
           </tbody>
         </table>
+        </div>
         <button type="submit">Submit</button>
       </form>
     </main>

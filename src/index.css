@@ -1,0 +1,8 @@
+th {
+    min-width: 120px;
+    text-align: center;
+}
+.lunch-table {
+    width: 100%;
+    overflow: auto;
+}
